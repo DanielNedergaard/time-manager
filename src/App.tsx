@@ -1,14 +1,11 @@
-import { useState } from 'react'
 import './App.css'
-import Stopwatch from './Stopwatch'
+import StopwatchComponent from './StopwatchComponent'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
       <h1>Time Manager</h1>
-      <Stopwatch />
+      <StopwatchComponent />
     </>
   )
 }
