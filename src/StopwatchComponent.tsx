@@ -22,7 +22,7 @@ export default function StopwatchComponent() {
 
     function resumeStopwatch() {
         setIsRunning(true);
-        
+
         timerRef.current = window.setInterval(() => {
             setElapsedTime((new Date().getTime() - startTimeRef.current) / 1000) // the / 1000 converts milliseconds to seconds
         }, 1000);
@@ -37,16 +37,16 @@ export default function StopwatchComponent() {
         <div className="card">
             <span id="time">{elapsedTime.toFixed(0)}s</span>
             {isRunning === false && timerRef.current === 0 && (
-                <button id="start-button" onClick={initiateStopwatch}>Start</button> // show start button when timer is not running
+                <button id="start-button" onClick={initiateStopwatch}>Start</button> // show start button when timer is not running and time is 0
             )}
             {isRunning && (
-                <button id="stop-button" onClick={stopStopwatch}>Stop</button>
+                <button id="stop-button" onClick={stopStopwatch}>Stop</button> // show stop button when timer is running
             )}
             {isRunning === false && timerRef.current > 0 && (
-                <button id="resume-button" onClick={resumeStopwatch}>Geonoptag</button>
+                <button id="resume-button" onClick={resumeStopwatch}>Geonoptag</button> // show resume button when timer is not running and time is greater than 0
             )}
             {isRunning === false && timerRef.current > 0 && (
-                <button id="reset-button" onClick={resetStopwatch}>Nulstil</button>
+                <button id="reset-button" onClick={resetStopwatch}>Nulstil</button> // show reset button when timer is not running and time is greater than 0
             )}
         </div>
     );
