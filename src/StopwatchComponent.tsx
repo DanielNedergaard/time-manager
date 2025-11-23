@@ -12,7 +12,7 @@ export default function StopwatchComponent() {
 
         timerRef.current = window.setInterval(() => {
             setElapsedTime(new Date().getTime() - startTimeRef.current) // the / 1000 converts milliseconds to seconds
-        }, 1000);
+        }, 100);
     }
 
     function stopStopwatch() {
