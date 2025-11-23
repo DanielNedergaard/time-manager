@@ -11,7 +11,7 @@ export default function StopwatchComponent() {
         startTimeRef.current = new Date().getTime();
 
         timerRef.current = window.setInterval(() => {
-            setElapsedTime(new Date().getTime() - startTimeRef.current) // the / 1000 converts milliseconds to seconds
+            setElapsedTime(new Date().getTime() - startTimeRef.current)
         }, 100);
     }
 
@@ -23,10 +23,10 @@ export default function StopwatchComponent() {
     function resumeStopwatch() {
         setIsRunning(true);
 
-        startTimeRef.current = new Date().getTime() - elapsedTime; // moving the startTime to match time passed and converting seconds to milliseconds 
+        startTimeRef.current = new Date().getTime() - elapsedTime; // moving the startTime to match time passed
 
         timerRef.current = window.setInterval(() => {
-            setElapsedTime(new Date().getTime() - startTimeRef.current) // the / 1000 converts milliseconds to seconds
+            setElapsedTime(new Date().getTime() - startTimeRef.current)
         }, 1000);
     }
 
