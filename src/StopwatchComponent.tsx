@@ -37,7 +37,7 @@ export default function StopwatchComponent() {
 
     function formatMsToHHMMSS(ms: number): string {
         let hours = Math.floor(ms / 60 / 60 / 1000);
-        let minutes = Math.floor((ms / 60 / 1000) % (60 * 60));
+        let minutes = Math.floor((ms / 60 / 1000) % 60);
         let seconds = Math.floor((ms / 1000) % 60);
 
         // adds leading zero
