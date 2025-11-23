@@ -23,6 +23,8 @@ export default function StopwatchComponent() {
     function resumeStopwatch() {
         setIsRunning(true);
 
+        startTimeRef.current = new Date().getTime() - elapsedTime * 1000; // moving the startTime to match time passed and converting seconds to milliseconds 
+
         timerRef.current = window.setInterval(() => {
             setElapsedTime((new Date().getTime() - startTimeRef.current) / 1000) // the / 1000 converts milliseconds to seconds
         }, 1000);
