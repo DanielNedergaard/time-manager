@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState } from 'react'
 
 export default function StopwatchComponent() {
     const [elapsedTime, setElapsedTime] = useState<number>(0);
