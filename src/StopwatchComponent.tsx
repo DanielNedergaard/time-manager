@@ -11,7 +11,7 @@ export default function StopwatchComponent() {
         startTimeRef.current = new Date().getTime();
 
         timerRef.current = window.setInterval(() => {
-            setElapsedTime((new Date().getTime() - startTimeRef.current) / 1000) // the / 1000 converts milliseconds to seconds
+            setElapsedTime(new Date().getTime() - startTimeRef.current) // the / 1000 converts milliseconds to seconds
         }, 1000);
     }
 
@@ -23,10 +23,10 @@ export default function StopwatchComponent() {
     function resumeStopwatch() {
         setIsRunning(true);
 
-        startTimeRef.current = new Date().getTime() - elapsedTime * 1000; // moving the startTime to match time passed and converting seconds to milliseconds 
+        startTimeRef.current = new Date().getTime() - elapsedTime; // moving the startTime to match time passed and converting seconds to milliseconds 
 
         timerRef.current = window.setInterval(() => {
-            setElapsedTime((new Date().getTime() - startTimeRef.current) / 1000) // the / 1000 converts milliseconds to seconds
+            setElapsedTime(new Date().getTime() - startTimeRef.current) // the / 1000 converts milliseconds to seconds
         }, 1000);
     }
 
@@ -35,9 +35,22 @@ export default function StopwatchComponent() {
         timerRef.current = 0;
     }
 
+    function formatMsToHHMMSS(ms: number): string {
+        let hours = Math.floor(ms / 60 / 60 / 1000);
+        let minutes = Math.floor((ms / 60 / 1000) % (60 * 60));
+        let seconds = Math.floor((ms / 1000) % 60);
+
+        // adds leading zero
+        let hoursStr = ("00" + hours).slice(-2);
+        let minutesStr = ("00" + minutes).slice(-2);
+        let secondsStr = ("00" + seconds).slice(-2);
+
+        return hoursStr + ":" + minutesStr + ":" + secondsStr;
+    }
+
     return (
         <div className="card">
-            <span id="time">{elapsedTime.toFixed(0)}s</span>
+            <span id="time">{formatMsToHHMMSS(elapsedTime)}</span>
             {isRunning === false && timerRef.current === 0 && (
                 <button id="start-button" onClick={initiateStopwatch}>Start</button> // show start button when timer is not running and time is 0
             )}
