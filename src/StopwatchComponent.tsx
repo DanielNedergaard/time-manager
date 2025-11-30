@@ -6,7 +6,7 @@ export default function StopwatchComponent() {
     const startTimeRef = useRef<number>(0);
 
     useEffect (() => {
-        let interval = undefined;
+        let interval: number | undefined;
 
         if (isRunning) {
             interval = setInterval(() => {
