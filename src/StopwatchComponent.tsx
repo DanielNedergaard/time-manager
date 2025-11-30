@@ -10,7 +10,7 @@ export default function StopwatchComponent() {
 
         if (isRunning) {
             interval = setInterval(() => {
-                setElapsedTime(new Date().getTime() - startTimeRef.current);
+                setElapsedTime(Date.now() - startTimeRef.current);
             }, 100);
         }
         return () => clearInterval(interval);
@@ -18,7 +18,7 @@ export default function StopwatchComponent() {
 
     function initiateStopwatch() {
         setIsRunning(true);
-        startTimeRef.current = new Date().getTime();
+        startTimeRef.current = Date.now();
     }
 
     function stopStopwatch() {
@@ -28,7 +28,7 @@ export default function StopwatchComponent() {
     function resumeStopwatch() {
         setIsRunning(true);
 
-        startTimeRef.current = new Date().getTime() - elapsedTime; // moving the startTime to match time passed
+        startTimeRef.current = Date.now() - elapsedTime; // moving the startTime to match time passed
     }
 
     function resetStopwatch() {
