@@ -1,10 +1,30 @@
 #root {
-  max-width: 1280px;
+  max-width: 1920px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
 }
 
-.card {
-  padding: 2em;
+.stopwatch-container {
+  display: flex;
+  gap: 10px;
+}
+
+.stopwatch-card {
+  text-align: center;
+  align-items: center;
+  width: 160px;
+  border: solid 1px;
+  border-color: black;
+  border-radius: 8px;
+}
+
+.time-span {
+  width: 100%;
+}
+
+.wide-button {
+  width: 100%;
+}
+
+.split-button {
+  width: 50%;
 }

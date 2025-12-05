@@ -49,20 +49,22 @@ export default function StopwatchComponent() {
     }
 
     return (
-        <div className="card">
-            <span id="time">{formatMsToHHMMSS(elapsedTime)}</span>
+        <div className="stopwatch-card">
+            <span className='time-span' >{formatMsToHHMMSS(elapsedTime)}</span>
             {isRunning === false && elapsedTime === 0 && (
-                <button id="start-button" onClick={initiateStopwatch}>Start</button> // show start button when timer is not running and time is 0
+                <button className='wide-button' onClick={initiateStopwatch}>Start</button> // show start button when timer is not running and time is 0
             )}
             {isRunning && (
-                <button id="stop-button" onClick={stopStopwatch}>Stop</button> // show stop button when timer is running
+                <button className='wide-button' onClick={stopStopwatch}>Stop</button> // show stop button when timer is running
             )}
-            {isRunning === false && elapsedTime > 0 && (
-                <button id="resume-button" onClick={resumeStopwatch}>Geonoptag</button> // show resume button when timer is not running and time is greater than 0
-            )}
-            {isRunning === false && elapsedTime > 0 && (
-                <button id="reset-button" onClick={resetStopwatch}>Nulstil</button> // show reset button when timer is not running and time is greater than 0
-            )}
+            <div>
+                {isRunning === false && elapsedTime > 0 && (
+                    <button className='split-button' onClick={resumeStopwatch}>Resume</button> // show resume button when timer is not running and time is greater than 0
+                )}
+                {isRunning === false && elapsedTime > 0 && (
+                    <button className='split-button' onClick={resetStopwatch}>Reset</button> // show reset button when timer is not running and time is greater than 0
+                )}
+            </div>
         </div>
     );
 }

@@ -5,7 +5,11 @@ function App() {
   return (
     <>
       <h1>Time Manager</h1>
-      <StopwatchComponent />
+      <div className="stopwatch-container">
+        <StopwatchComponent />
+        <StopwatchComponent />
+        <StopwatchComponent />
+      </div>
     </>
   )
 }
