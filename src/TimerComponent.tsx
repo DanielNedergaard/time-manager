@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { formatMsToHHMMSS } from './timeUtils';
 
-export default function StopwatchComponent() {
+export default function TimerComponent() {
     const [elapsedTime, setElapsedTime] = useState<number>(0);
     const [isRunning, setIsRunning] = useState<boolean>(false);
     const startTimeRef = useRef<number>(0);
@@ -17,22 +17,22 @@ export default function StopwatchComponent() {
         return () => clearInterval(interval);
     }, [isRunning]);
 
-    function initiateStopwatch() {
+    function initiateTimer() {
         setIsRunning(true);
         startTimeRef.current = Date.now();
     }
 
-    function stopStopwatch() {
+    function stopTimer() {
         setIsRunning(false);
     }
 
-    function resumeStopwatch() {
+    function resumeTimer() {
         setIsRunning(true);
 
         startTimeRef.current = Date.now() - elapsedTime; // moving the startTime to match time passed
     }
 
-    function resetStopwatch() {
+    function resetTimer() {
         setElapsedTime(0);
     }
 
@@ -45,17 +45,17 @@ export default function StopwatchComponent() {
                 <span className='time-span' >{formatMsToHHMMSS(elapsedTime)}</span>
             )}
             {isRunning === false && elapsedTime === 0 && (
-                <button className='wide-button' onClick={initiateStopwatch}>Start</button> // show start button when timer is not running and time is 0
+                <button className='wide-button' onClick={initiateTimer}>Start</button> // show start button when timer is not running and time is 0
             )}
             {isRunning && (
-                <button className='wide-button' onClick={stopStopwatch}>Stop</button> // show stop button when timer is running
+                <button className='wide-button' onClick={stopTimer}>Stop</button> // show stop button when timer is running
             )}
             <div>
                 {isRunning === false && elapsedTime > 0 && (
-                    <button className='split-button' onClick={resumeStopwatch}>Resume</button> // show resume button when timer is not running and time is greater than 0
+                    <button className='split-button' onClick={resumeTimer}>Resume</button> // show resume button when timer is not running and time is greater than 0
                 )}
                 {isRunning === false && elapsedTime > 0 && (
-                    <button className='split-button' onClick={resetStopwatch}>Reset</button> // show reset button when timer is not running and time is greater than 0
+                    <button className='split-button' onClick={resetTimer}>Reset</button> // show reset button when timer is not running and time is greater than 0
                 )}
             </div>
         </div>
