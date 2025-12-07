@@ -10,3 +10,13 @@ export function formatMsToHHMMSS(ms: number): string {
 
     return hoursStr + ":" + minutesStr + ":" + secondsStr;
 }
+
+export function formatHHMMSSToMs(HHMMSS: string): number {
+    let hours = Number(HHMMSS.slice(0, 2));
+    let minutes = Number(HHMMSS.slice(3, 5));
+    let seconds  = Number(HHMMSS.slice(6, 8));
+    
+    let ms = (hours * 60 * 60 * 1000) + (minutes * 60 * 1000) + (seconds * 1000);
+
+    return ms;
+}

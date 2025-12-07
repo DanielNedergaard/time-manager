@@ -39,7 +39,7 @@ export default function TimerComponent() {
     return (
         <div className="stopwatch-card">
             {isRunning === false && (
-                <input className='time-span' >{formatMsToHHMMSS(elapsedTime)}</input>
+                <input className='time-span' value={formatMsToHHMMSS(elapsedTime)} />
             )}
             {isRunning === true && (
                 <span className='time-span' >{formatMsToHHMMSS(elapsedTime)}</span>
