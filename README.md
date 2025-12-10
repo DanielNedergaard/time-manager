@@ -1,6 +1,6 @@
 Work in progress...
 
-# Time Manager
+![Time Manager screenshot](images/Time-manager_10-12-2025.png)
 
 Web app created with React and Vite and written in TypeScript.
 
