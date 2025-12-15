@@ -52,17 +52,17 @@ export default function StopwatchComponent() {
         <div className="stopwatch-card">
             <span className='time-span' >{formatMsToHHMMSS(elapsedTime)}</span>
             {isRunning === false && elapsedTime === 0 && (
-                <button className='wide-button' onClick={initiateStopwatch}>Start</button> // show start button when timer is not running and time is 0
+                <button className='wide-button green-button' onClick={initiateStopwatch}>Start</button> // show start button when timer is not running and time is 0
             )}
             {isRunning && (
-                <button className='wide-button' onClick={stopStopwatch}>Stop</button> // show stop button when timer is running
+                <button className='wide-button red-button' onClick={stopStopwatch}>Stop</button> // show stop button when timer is running
             )}
             <div>
                 {isRunning === false && elapsedTime > 0 && (
-                    <button className='split-button' onClick={resumeStopwatch}>Resume</button> // show resume button when timer is not running and time is greater than 0
+                    <button className='split-button green-button' onClick={resumeStopwatch}>Resume</button> // show resume button when timer is not running and time is greater than 0
                 )}
                 {isRunning === false && elapsedTime > 0 && (
-                    <button className='split-button' onClick={resetStopwatch}>Reset</button> // show reset button when timer is not running and time is greater than 0
+                    <button className='split-button red-button' onClick={resetStopwatch}>Reset</button> // show reset button when timer is not running and time is greater than 0
                 )}
             </div>
         </div>

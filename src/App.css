@@ -1,3 +1,11 @@
+:root {
+  --green-base: rgb(0, 100, 0);
+  --green-hover: rgb(0, 128, 0);
+
+  --red-base: rgb(139, 0, 0);
+  --red-hover: rgb(178, 0, 0);
+}
+
 #root {
   max-width: 1920px;
   margin: 0 auto;
@@ -15,10 +23,13 @@
   border: solid 1px;
   border-color: black;
   border-radius: 8px;
+  overflow: hidden;
 }
 
 .time-span {
+  display: block;
   width: 100%;
+  padding: 0.5em 0;
 }
 
 .wide-button {
@@ -27,4 +38,28 @@
 
 .split-button {
   width: 50%;
+}
+
+.green-button {
+  background-color: var(--green-base);
+}
+.green-button:hover {
+  background-color: var(--green-hover);
+}
+
+.red-button {
+  background-color: var(--red-base);
+}
+.red-button:hover {
+  background-color: var(--red-hover);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+  --green-base: rgb(0, 128, 0);
+  --green-hover: rgb(0, 100, 0);
+
+  --red-base: rgb(178, 0, 0);
+  --red-hover: rgb(139, 0, 0);
+  }
 }
