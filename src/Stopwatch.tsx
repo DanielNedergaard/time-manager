@@ -1,7 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
 
-export default function Stopwatch() {
-    const [elapsedTime, setElapsedTime] = useState<number>(0);
+type StopwatchProps = {
+    index: number;
+    elapsedTime: number;
+    setElapsedTime: React.Dispatch<React.SetStateAction<number[]>>;
+};
+
+export default function Stopwatch({ index, elapsedTime, setElapsedTime }: StopwatchProps) {
+    // const [elapsedTime, setElapsedTime] = useState<number>(0);
     const [isRunning, setIsRunning] = useState<boolean>(false);
     const startTimeRef = useRef<number>(0);
 
@@ -10,7 +16,12 @@ export default function Stopwatch() {
 
         if (isRunning) {
             interval = setInterval(() => {
-                setElapsedTime(Date.now() - startTimeRef.current);
+                const newValue = Date.now() - startTimeRef.current;
+                setElapsedTime(previousArray => {
+                    const newArray = [...previousArray];
+                    newArray[index] = newValue;
+                    return newArray;
+                });
             }, 100);
         }
         return () => clearInterval(interval);
@@ -32,7 +43,11 @@ export default function Stopwatch() {
     }
 
     function resetStopwatch() {
-        setElapsedTime(0);
+        setElapsedTime(previousArray => {
+            const newArray = [...previousArray];
+            newArray[index] = 0;
+            return newArray;
+        });
     }
 
     function formatMsToHHMMSS(ms: number): string {
