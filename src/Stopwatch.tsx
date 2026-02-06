@@ -7,7 +7,6 @@ type StopwatchProps = {
 };
 
 export default function Stopwatch({ index, elapsedTime, setElapsedTime }: StopwatchProps) {
-    // const [elapsedTime, setElapsedTime] = useState<number>(0);
     const [isRunning, setIsRunning] = useState<boolean>(false);
     const startTimeRef = useRef<number>(0);
 
