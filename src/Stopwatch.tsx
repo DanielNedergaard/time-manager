@@ -1,13 +1,15 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
 
 type StopwatchProps = {
     index: number;
     elapsedTime: number;
     updateElapsedTime: (index: number, value: number) => void;
+    isRunning: boolean;
+    updateIsRunning: (index: number, value: boolean) => void;
 };
 
-export default function Stopwatch({ index, elapsedTime, updateElapsedTime }: StopwatchProps) {
-    const [isRunning, setIsRunning] = useState<boolean>(false);
+export default function Stopwatch({ index, elapsedTime, updateElapsedTime, isRunning, updateIsRunning }: StopwatchProps) {
+
     const startTimeRef = useRef<number>(0);
 
     useEffect (() => {
@@ -22,16 +24,16 @@ export default function Stopwatch({ index, elapsedTime, updateElapsedTime }: Sto
     }, [isRunning]);
 
     function initiateStopwatch() {
-        setIsRunning(true);
+        updateIsRunning(index, true);
         startTimeRef.current = Date.now();
     }
 
     function stopStopwatch() {
-        setIsRunning(false);
+        updateIsRunning(index, false);
     }
 
     function resumeStopwatch() {
-        setIsRunning(true);
+        updateIsRunning(index, true);
 
         startTimeRef.current = Date.now() - elapsedTime; // moving the startTime to match time passed
     }
