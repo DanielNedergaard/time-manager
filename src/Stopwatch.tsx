@@ -13,7 +13,7 @@ export default function Stopwatch({ index, elapsedTime, updateElapsedTime, isRun
     const startTimeRef = useRef<number>(0);
 
     useEffect (() => {
-        let interval: number | undefined;
+        let interval: ReturnType<typeof setInterval> | undefined;
 
         if (isRunning) {
             interval = setInterval(() => {
