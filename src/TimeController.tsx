@@ -1,9 +1,30 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Stopwatch from './Stopwatch'
 
 export default function TimeController(){
     const [elapsedTime, setElapsedTime] = useState<number[]>([0, 0, 0]);
     const [isStopwatchRunning, setIsStopwatchRunning] = useState<boolean[]>([false, false, false]);
+
+    useEffect(() => {
+        const storedElapsedTime = localStorage.getItem('elapsedTime');
+        const storedIsStopwatchRunning = localStorage.getItem('isStopwatchRunning');
+
+        if (storedElapsedTime !== null) {
+            setElapsedTime(JSON.parse(storedElapsedTime));
+        }
+
+        if (storedIsStopwatchRunning !== null) {
+            setIsStopwatchRunning(JSON.parse(storedIsStopwatchRunning));
+        }
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem('elapsedTime', JSON.stringify(elapsedTime));
+    }, [elapsedTime]);
+
+    useEffect(() => {
+        localStorage.setItem('isStopwatchRunning', JSON.stringify(isStopwatchRunning));
+    }, [isStopwatchRunning]);
 
     function updateElapsedTime(index: number, value: number) {
         setElapsedTime(previousArray => {
