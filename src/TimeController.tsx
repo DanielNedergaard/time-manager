@@ -23,27 +23,15 @@ export default function TimeController(){
 
     return (
         <div className="stopwatch-container">
-            <Stopwatch 
-                index={0}
-                elapsedTime={elapsedTime[0]}
-                updateElapsedTime={updateElapsedTime}
-                isRunning={isStopwatchRunning[0]}
-                updateIsRunning={updateIsStopwatchRunning}
-            />
-            <Stopwatch 
-                index={1}
-                elapsedTime={elapsedTime[1]}
-                updateElapsedTime={updateElapsedTime}
-                isRunning={isStopwatchRunning[1]}
-                updateIsRunning={updateIsStopwatchRunning}
-            />
-            <Stopwatch
-                index={2} 
-                elapsedTime={elapsedTime[2]}
-                updateElapsedTime={updateElapsedTime}
-                isRunning={isStopwatchRunning[2]}
-                updateIsRunning={updateIsStopwatchRunning}
-            />
+            {elapsedTime.map((time, index) => (
+                <Stopwatch
+                    index={index}
+                    elapsedTime={time}
+                    updateElapsedTime={updateElapsedTime}
+                    isRunning={isStopwatchRunning[index]}
+                    updateIsRunning={updateIsStopwatchRunning}
+                />
+            ))}
         </div>
     )
 }
