@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 
 type StopwatchProps = {
     index: number;
@@ -6,18 +6,18 @@ type StopwatchProps = {
     updateElapsedTime: (index: number, value: number) => void;
     isRunning: boolean;
     updateIsRunning: (index: number, value: boolean) => void;
+    lastStartedAt: number;
+    updateLastStartedAt: (index: number, value: number) => void;
 };
 
-export default function Stopwatch({ index, elapsedTime, updateElapsedTime, isRunning, updateIsRunning }: StopwatchProps) {
-
-    const startTimeRef = useRef<number>(0);
+export default function Stopwatch({ index, elapsedTime, updateElapsedTime, isRunning, updateIsRunning, lastStartedAt, updateLastStartedAt }: StopwatchProps) {
 
     useEffect (() => {
         let interval: ReturnType<typeof setInterval> | undefined;
 
         if (isRunning) {
             interval = setInterval(() => {
-                updateElapsedTime(index, Date.now() - startTimeRef.current);
+                updateElapsedTime(index, Date.now() - lastStartedAt);
             }, 100);
         }
         return () => clearInterval(interval);
@@ -25,7 +25,7 @@ export default function Stopwatch({ index, elapsedTime, updateElapsedTime, isRun
 
     function initiateStopwatch() {
         updateIsRunning(index, true);
-        startTimeRef.current = Date.now();
+        updateLastStartedAt(index, Date.now());
     }
 
     function stopStopwatch() {
@@ -34,8 +34,7 @@ export default function Stopwatch({ index, elapsedTime, updateElapsedTime, isRun
 
     function resumeStopwatch() {
         updateIsRunning(index, true);
-
-        startTimeRef.current = Date.now() - elapsedTime; // moving the startTime to match time passed
+        updateLastStartedAt(index, Date.now() - elapsedTime);
     }
 
     function resetStopwatch() {

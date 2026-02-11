@@ -2,21 +2,18 @@ import { useEffect, useState } from 'react'
 import Stopwatch from './Stopwatch'
 
 export default function TimeController(){
-    const [elapsedTime, setElapsedTime] = useState<number[]>([0, 0, 0]);
-    const [isStopwatchRunning, setIsStopwatchRunning] = useState<boolean[]>([false, false, false]);
-
-    useEffect(() => {
-        const storedElapsedTime = localStorage.getItem('elapsedTime');
-        const storedIsStopwatchRunning = localStorage.getItem('isStopwatchRunning');
-
-        if (storedElapsedTime !== null) {
-            setElapsedTime(JSON.parse(storedElapsedTime));
-        }
-
-        if (storedIsStopwatchRunning !== null) {
-            setIsStopwatchRunning(JSON.parse(storedIsStopwatchRunning));
-        }
-    }, []);
+    const [elapsedTime, setElapsedTime] = useState<number[]>(() => {
+        const stored = localStorage.getItem('elapsedTime');
+        return stored ? JSON.parse(stored) : [0, 0, 0];
+    });
+    const [isStopwatchRunning, setIsStopwatchRunning] = useState<boolean[]>(() => {
+        const stored = localStorage.getItem('isStopwatchRunning');
+        return stored ? JSON.parse(stored) : [false, false, false];
+    });
+    const [lastStartedAt, setLastStartedAt] = useState<number[]>(() => {
+        const stored = localStorage.getItem('lastStartedAt');
+        return stored ? JSON.parse(stored) : [0, 0, 0];
+    });
 
     useEffect(() => {
         localStorage.setItem('elapsedTime', JSON.stringify(elapsedTime));
@@ -25,6 +22,10 @@ export default function TimeController(){
     useEffect(() => {
         localStorage.setItem('isStopwatchRunning', JSON.stringify(isStopwatchRunning));
     }, [isStopwatchRunning]);
+
+    useEffect(() => {
+        localStorage.setItem('lastStartedAt', JSON.stringify(lastStartedAt));
+    }, [lastStartedAt]);
 
     function updateElapsedTime(index: number, value: number) {
         setElapsedTime(previousArray => {
@@ -42,6 +43,14 @@ export default function TimeController(){
         });
     }
 
+    function updateLastStartedAt(index: number, value: number) {
+        setLastStartedAt(previousArray => {
+            const newArray = [...previousArray];
+            newArray[index] = value;
+            return newArray;
+        });
+    }
+
     return (
         <div className="stopwatch-container">
             {elapsedTime.map((time, index) => (
@@ -51,6 +60,8 @@ export default function TimeController(){
                     updateElapsedTime={updateElapsedTime}
                     isRunning={isStopwatchRunning[index]}
                     updateIsRunning={updateIsStopwatchRunning}
+                    lastStartedAt={lastStartedAt[index]}
+                    updateLastStartedAt={updateLastStartedAt}
                 />
             ))}
         </div>
